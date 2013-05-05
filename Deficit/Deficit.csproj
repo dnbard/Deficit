@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="core\MouseManager.cs" />
     <Compile Include="DeficitGame.cs" />
+    <Compile Include="GUI\ParallaxBackground.cs" />
     <Compile Include="GUI\VisualComponent.cs" />
     <Compile Include="Extentions\LinqExtention.cs" />
     <Compile Include="Extentions\StringExtention.cs" />

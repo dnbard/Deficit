@@ -115,7 +115,7 @@ namespace Deficit.Scenes
         {
             SpriteBatch batch = Program.Game.spriteBatch;
 
-            batch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
+            batch.Begin(SpriteSortMode.BackToFront, BlendState.NonPremultiplied);
             Components.ForEach(element => element.Draw(gameTime));
             batch.End();
         }

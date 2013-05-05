@@ -11,7 +11,41 @@ namespace Deficit.Scenes
     {
         public SceneMainMenu() : base("mainmenu")
         {
-            Add(new GUI.StretchBackground{Texture = ImagesManager.Get("background")});
+            //Add(new GUI.StretchBackground{Texture = ImagesManager.Get("background")});
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("bgscroll"),
+                ParallaxValue = 20,
+                Layer = 1f
+            });
+
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("station-default"),
+                ParallaxValue = 220,
+                Layer = 0.95f,
+                X = 800
+            });
+
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("menu0"),
+                ParallaxValue = 500,
+                Layer = 0.96f,
+                X = 300,
+                Direction = 1,
+                Y = 140
+            });
+
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("menu1"),
+                ParallaxValue = 1280,
+                Layer = 0.97f,
+                X = -100,
+                Direction = 1,
+                Y = 140
+            });
 
             //New Game button
             Add(new Button
