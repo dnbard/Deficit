@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Deficit.Scenes;
+using Deficit.core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,7 +44,7 @@ namespace Deficit
             GraphicsDevice.Clear(Color.Black);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             GraphicsDevice.Clear(Color.Black);
             Window.Title = "Deficit";
@@ -51,6 +52,7 @@ namespace Deficit
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Components.Add(MouseManager.Instance);
 
             SceneManager.Current = new SceneMainMenu();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Deficit.Images;
+using Deficit.core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -100,33 +101,40 @@ namespace Deficit.Extentions
         public EventHandler OnMouseLeftClick;
         public EventHandler OnMouseRightClick;
 
-        private bool lastTickHover = false;
+        private bool _lastTickHover = false;
+        protected bool IsHover;
+        protected bool IsLeftPress;
+        protected bool IsRightPress;
 
         public override void Update(GameTime gameTime)
         {
             if (OnUpdate != null) OnUpdate(this, null);
-            var mouse = Mouse.GetState();
-            var mouseLast = Program.Game.LastMouseState;
 
-            bool isHover = PointInRect(new Vector2(mouse.X, mouse.Y), Position, Size);
-            if (isHover && !lastTickHover)
+            IsHover = PointInRect(new Vector2(MouseManager.X, MouseManager.Y), Position, Size);
+            if (IsHover)
             {
-                if (lastTickHover)
+                if (_lastTickHover)
                 {
                     if (OnMouseHover != null) OnMouseHover(this, null);
                 }
-                else if (OnMouseIn != null) OnMouseIn(this, null);
+                else
+                {
+                    if (OnMouseIn != null) OnMouseIn(this, null);
+                    _lastTickHover = true;
+                }
 
-                lastTickHover = true;
-
-                if (mouseLast.LeftButton == ButtonState.Pressed && mouse.LeftButton == ButtonState.Released)
-                    if (OnMouseLeftClick != null) OnMouseLeftClick(this, null);
-
-                if (mouseLast.RightButton == ButtonState.Pressed && mouse.RightButton == ButtonState.Released)
-                    if (OnMouseRightClick != null) OnMouseRightClick(this, null);
+                IsLeftPress = MouseManager.LeftButtonPress;
+                IsRightPress = MouseManager.RightButtonPress;
+                if (MouseManager.LeftButtonClick) if (OnMouseLeftClick != null) OnMouseLeftClick(this, null);
+                if (MouseManager.RightButtonClick) if (OnMouseRightClick != null) OnMouseRightClick(this, null);
             }
-            else if (!isHover && lastTickHover)
+            else if (_lastTickHover)
+            {
                 if (OnMouseOut != null) OnMouseOut(this, null);
+                _lastTickHover = false;
+                IsLeftPress = false;
+                IsRightPress = false;
+            }
         }
 
         public static bool PointInRect(Vector2 point, Vector2 location, Vector2 size)
