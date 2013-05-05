@@ -13,7 +13,39 @@ namespace Deficit.Scenes
         {
             Add(new GUI.StretchBackground{Texture = ImagesManager.Get("background")});
 
-            Add(new Button{Layer = 0.5f, Texture = ImagesManager.Get("gui-menu"), TextureKey = "start"});
+            //New Game button
+            Add(new Button
+                {
+                    Layer = 0.5f, 
+                    Texture = ImagesManager.Get("gui-menu"), 
+                    TextureKey = "start", 
+                    X = 50, 
+                    Y = 150,
+                    OnMouseLeftClick = CreateNewGame
+                });
+            
+            //Exit button
+            Add(new Button
+                {
+                    Layer = 0.5f, 
+                    Texture = ImagesManager.Get("gui-menu"), 
+                    TextureKey = "exit", 
+                    X = 50, 
+                    Y = 240, 
+                    OnMouseLeftClick = Exit
+                });
+        }
+
+        private void CreateNewGame(object sender, EventArgs args)
+        {
+            var mainMenu = SceneManager.Current;
+            SceneManager.Current = new SceneMain();
+            SceneManager.Delete(mainMenu);
+        }
+
+        private void Exit(object sender, EventArgs args)
+        {
+            Program.Game.Exit();
         }
     }
 }

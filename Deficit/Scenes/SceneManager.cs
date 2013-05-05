@@ -63,7 +63,7 @@ namespace Deficit.Scenes
                 Current = dictionary[sceneName];
         }
 
-        public void Set(Scene sceneObject)
+        public static void Set(Scene sceneObject)
         {
             var Scenes = instance.scenes;
             if (Scenes == null) throw new ArgumentNullException("Scenes");
@@ -76,7 +76,7 @@ namespace Deficit.Scenes
             }
         }
 
-        public void Delete(Scene SceneObject)
+        public static void Delete(Scene SceneObject)
         {
             var Scenes = instance.scenes;
             if (Scenes.ContainsValue(SceneObject))
@@ -87,7 +87,7 @@ namespace Deficit.Scenes
             }
         }
 
-        public void Delete(string SceneName)
+        public static void Delete(string SceneName)
         {
             var Scenes = instance.scenes;
             if (Scenes.ContainsKey(SceneName))
@@ -98,7 +98,7 @@ namespace Deficit.Scenes
             }
         }
 
-        public void Add(Scene SceneObject)
+        public static void Add(Scene SceneObject)
         {
             var Scenes = instance.scenes;
             Scenes.Add(SceneObject.Name, SceneObject);
