@@ -20,25 +20,36 @@ namespace Deficit.core
             
         }
 
-        private MouseState _xnaCurrent;
-        private MouseState _xnaLast;
+        private MouseState _mouseCurrent;
+        private MouseState _mouseLast;
+
+        public static bool MouseMoved
+        {
+            get 
+            { 
+                var current = Instance._mouseCurrent;
+                var last = Instance._mouseLast;
+
+                return current.X != last.X || current.Y != last.Y;
+            }
+        }
 
         public static int X
         {
-            get { return Instance._xnaCurrent.X; }
+            get { return Instance._mouseCurrent.X; }
         }
 
         public static int Y
         {
-            get { return Instance._xnaCurrent.Y; }
+            get { return Instance._mouseCurrent.Y; }
         }
 
         public static bool LeftButtonClick
         {
             get
             {
-                return Instance._xnaCurrent.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
-                       Instance._xnaLast.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
+                return Instance._mouseCurrent.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
+                       Instance._mouseLast.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
             }
         }
 
@@ -46,25 +57,25 @@ namespace Deficit.core
         {
             get
             {
-                return Instance._xnaCurrent.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
-                       Instance._xnaLast.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
+                return Instance._mouseCurrent.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
+                       Instance._mouseLast.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
             }
         }
 
         public static bool LeftButtonPress
         {
-            get { return Instance._xnaCurrent.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed; }
+            get { return Instance._mouseCurrent.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed; }
         }
 
         public static bool RightButtonPress
         {
-            get { return Instance._xnaCurrent.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed; }
+            get { return Instance._mouseCurrent.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed; }
         }
 
         public override void Update(GameTime gTime)
         {
-            _xnaLast = _xnaCurrent;
-            _xnaCurrent = Mouse.GetState();
+            _mouseLast = _mouseCurrent;
+            _mouseCurrent = Mouse.GetState();
         }
     }
 }

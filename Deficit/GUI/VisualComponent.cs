@@ -22,6 +22,9 @@ namespace Deficit.Extentions
             set { _scale = value; }
         }
 
+        public float Opacity { get; set; }
+        public Color Overlay { get; set; }
+
         protected Vector2 Position
         {
             get{ return new Vector2(X, Y);}
@@ -85,13 +88,14 @@ namespace Deficit.Extentions
 
         public VisualComponent() : base(Program.Game)
         {
-            
+            Opacity = 1f;
+            Overlay = Color.White;
         }
 
         public override void Draw(GameTime gameTime)
         {
             if (Texture == null) return;
-            Texture.Draw(Batch, TextureKey, Position, 0f, Scale, Vector2.Zero, Color.White, Layer);
+            Texture.Draw(Batch, TextureKey, Position, 0f, Scale, Vector2.Zero, Overlay * Opacity, Layer);
         }
 
         public EventHandler OnUpdate;

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Deficit.GUI;
+using Deficit.Gameplay;
 using Deficit.Images;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Deficit.Scenes
 {

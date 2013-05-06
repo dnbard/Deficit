@@ -20,8 +20,9 @@ namespace Deficit.Scenes
     {
         public string Name = "SceneDefaultName";
 
-        protected List<DrawableGameComponent> Components = new List<DrawableGameComponent>();
-        public int Count { get { return Components.Count; } }
+        protected List<DrawableGameComponent> DrawableComponents = new List<DrawableGameComponent>();
+        protected List<GameComponent> UpdatableComponents = new List<GameComponent>();
+        public int Count { get { return DrawableComponents.Count + UpdatableComponents.Count; } }
 
         public EventHandler ElementsChanged;
         public Action<Vector2> OnMouseClick;
@@ -36,20 +37,24 @@ namespace Deficit.Scenes
             Name = _name;
         }
 
-        public void Remove(DrawableGameComponent[] elements)
+        public void Remove(IGameComponent[] elements)
         {
             foreach (var element in elements)
             {
-                if (Components.Contains(element))
-                    Components.Remove(element);
+                if (element is DrawableGameComponent && DrawableComponents.Contains(element))
+                    DrawableComponents.Remove(element as DrawableGameComponent);
+                else if (element is GameComponent && UpdatableComponents.Contains(element))
+                    UpdatableComponents.Remove(element as GameComponent);
             }
             if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
         }
         
-        public void Remove(DrawableGameComponent element)
+        public void Remove(IGameComponent element)
         {
-            if (Components.Contains(element))
-                Components.Remove(element);
+            if (element is DrawableGameComponent && DrawableComponents.Contains(element))
+                DrawableComponents.Remove(element as DrawableGameComponent);
+            else if (element is GameComponent && UpdatableComponents.Contains(element))
+                UpdatableComponents.Remove(element as GameComponent);
             if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
         }
 
@@ -57,16 +62,33 @@ namespace Deficit.Scenes
         {
             foreach (var element in elements)
             {
-                if (!Components.Contains(element))
-                    Components.Add(element);
+                if (!DrawableComponents.Contains(element))
+                    DrawableComponents.Add(element);
+            }
+            if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Add(GameComponent[] elements)
+        {
+            foreach (var element in elements)
+            {
+                if (!UpdatableComponents.Contains(element))
+                    UpdatableComponents.Add(element);
             }
             if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
         }
 
         public void Add(DrawableGameComponent element)
         {
-            if (!Components.Contains(element))
-                Components.Add(element);
+            if (!DrawableComponents.Contains(element))
+                DrawableComponents.Add(element);
+            if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Add(GameComponent element)
+        {
+            if (!UpdatableComponents.Contains(element))
+                UpdatableComponents.Add(element);
             if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
         }
 
@@ -116,7 +138,7 @@ namespace Deficit.Scenes
             SpriteBatch batch = Program.Game.spriteBatch;
 
             batch.Begin(SpriteSortMode.BackToFront, BlendState.NonPremultiplied);
-            Components.ForEach(element => element.Draw(gameTime));
+            DrawableComponents.ForEach(element => element.Draw(gameTime));
             batch.End();
         }
 
@@ -138,9 +160,15 @@ namespace Deficit.Scenes
 
             if (UpdateElements)
             {
-                for (int i = 0; i < Components.Count; i++)
+                for (int i = 0; i < DrawableComponents.Count; i++)
                 {
-                    DrawableGameComponent element = Components[i];
+                    DrawableGameComponent element = DrawableComponents[i];
+                    element.Update(gameTime);
+                }
+
+                for (int i = 0; i < UpdatableComponents.Count; i++)
+                {
+                    GameComponent element = UpdatableComponents[i];
                     element.Update(gameTime);
                 }
             }
