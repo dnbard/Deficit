@@ -37,7 +37,7 @@
   <ItemGroup>
     <Compile Include="core\MouseManager.cs" />
     <Compile Include="DeficitGame.cs" />
-    <Compile Include="Gameplay\ContainmentSector.cs" />
+    <Compile Include="Gameplay\FlickerImage.cs" />
     <Compile Include="Gameplay\Station.cs" />
     <Compile Include="Gameplay\Time.cs" />
     <Compile Include="GUI\ParallaxBackground.cs" />

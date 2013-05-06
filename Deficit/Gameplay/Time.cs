@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Deficit.Images;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,12 +18,16 @@ namespace Deficit.Gameplay
         private readonly SpriteFont _fontBig;
         private readonly SpriteBatch _batch;
 
+        private Image texture;
+
         public Time() : base(Program.Game)
         {
             TimeLeft = DefaultTurnLength;
             _font = Game.Content.Load<SpriteFont>("Fonts/defaultFont");
             _fontBig = Game.Content.Load<SpriteFont>("Fonts/arialBig");
             _batch = Program.Game.spriteBatch;
+
+            texture = ImagesManager.Get("gui-labels");
         }
 
         public void ResetTimer()
@@ -76,8 +81,9 @@ namespace Deficit.Gameplay
             }
             else
             {
-                _batch.DrawString(_font, "|| PAUSED", new Vector2(1100, 10), Color.White, 0f, Vector2.Zero, 1f,
-                                 SpriteEffects.None, 0.5f);
+                //_batch.DrawString(_font, "|| PAUSED", new Vector2(1100, 10), Color.White, 0f, Vector2.Zero, 1f,
+                //                 SpriteEffects.None, 0.5f);
+                texture.Draw(_batch, "pause", new Vector2(1100, 10), Color.White,0.5f);
             }
         }
     }
