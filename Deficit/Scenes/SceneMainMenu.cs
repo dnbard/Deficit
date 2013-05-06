@@ -22,7 +22,7 @@ namespace Deficit.Scenes
             Add(new ParallaxBackground
             {
                 Texture = ImagesManager.Get("station-default"),
-                ParallaxValue = 220,
+                ParallaxValue = 60,
                 Layer = 0.95f,
                 X = 800
             });
@@ -37,7 +37,7 @@ namespace Deficit.Scenes
                 Y = 140
             });
 
-            Add(new ParallaxBackground
+            /*Add(new ParallaxBackground
             {
                 Texture = ImagesManager.Get("menu1"),
                 ParallaxValue = 1280,
@@ -45,6 +45,46 @@ namespace Deficit.Scenes
                 X = -100,
                 Direction = 1,
                 Y = 140
+            });*/
+
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("menu2"),
+                ParallaxValue = 40,
+                Layer = 0.97f,
+                X = 440,
+                Direction = -1,
+                Y = 640
+            });
+
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("menu3"),
+                ParallaxValue = 40,
+                Layer = 0.97f,
+                X = 380,
+                Direction = -1,
+                Y = 40
+            });
+
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("menu4"),
+                ParallaxValue = 30,
+                Layer = 0.97f,
+                X = 680,
+                Direction = -1,
+                Y = 40
+            });
+
+            Add(new ParallaxBackground
+            {
+                Texture = ImagesManager.Get("menu5"),
+                ParallaxValue = 25,
+                Layer = 0.97f,
+                X = 640,
+                Direction = -1,
+                Y = 250
             });
 
             //New Game button
