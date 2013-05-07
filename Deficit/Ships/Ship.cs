@@ -60,6 +60,17 @@ namespace Deficit.Ships
             get { return 0f; }
         }
 
+        private string _name;
+        public string Name
+        {
+            get 
+            { 
+                if (string.IsNullOrEmpty(_name)) return "FIX ME!";
+                return _name;
+            }
+            set { _name = value; }
+        }
+
         public override void Draw(GameTime gameTime)
         {
             if (Texture == null) return;
@@ -71,9 +82,13 @@ namespace Deficit.Ships
         {
             base.Update(gameTime);
 
+            
+            //_parentScene.Particles.AddTrails(x, Y);
+
             switch (CurrentAction)
             {
                 case ShipActions.FlyToContainment:
+                    //_parentScene.Particles.AddTrails(x, Y);
                     X += Speed;
                     if (X > FlyTo.X + 50)
                     {

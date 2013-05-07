@@ -24,7 +24,11 @@ namespace Deficit.Gameplay
         public float OpacityIncrementValue { get; set; }
         public float OpacityMinimum { get; set; }
 
-        public Color FirstColor { get; set; }
+        private Color _first;
+        public Color FirstColor {
+            get { return _first;  }
+            set { _first = _tranformToColor = value; }
+        }
         public Color SecondColor { get; set; }
         private Color _tranformToColor;
 

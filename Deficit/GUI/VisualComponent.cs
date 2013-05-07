@@ -27,7 +27,7 @@ namespace Deficit.Extentions
 
         protected Vector2 Position
         {
-            get{ return new Vector2(X, Y);}
+            get{ return new Vector2(X + ParentOffsetX, Y + ParentOffsetY);}
         }
 
         private Vector2 _imageSize = Vector2.Zero;
@@ -56,6 +56,26 @@ namespace Deficit.Extentions
             } 
         }
         protected SpriteBatch Batch = Program.Game.spriteBatch;
+
+        public VisualComponent Parent { get; set; }
+
+        protected int ParentOffsetX
+        {
+            get
+            {
+                if (Parent == null) return 0;
+                return Parent.X;
+            }
+        }
+
+        protected int ParentOffsetY
+        {
+            get
+            {
+                if (Parent == null) return 0;
+                return Parent.Y;
+            }
+        }
 
         protected const string DefaultTextureKey = "full";
         private string _key = DefaultTextureKey;

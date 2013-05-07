@@ -29,5 +29,12 @@ namespace Deficit.Gameplay
             Fact = truth;
             IsKnown = false;
         }
+
+        public string Get()
+        {
+            bool isLie = !FactYouKnow.Equals(Fact);
+            if (isLie && !IsKnown) return FactYouKnow.ToString();
+            return Fact.ToString();
+        }
     }
 }

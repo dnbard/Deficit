@@ -8,7 +8,6 @@ using Deficit.core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace Deficit.GUI
 {
     class ParallaxComponent : DrawableGameComponent
@@ -23,7 +22,7 @@ namespace Deficit.GUI
         public int ParallaxValue { get; set; }
         public int Direction { get; set; }
 
-        private readonly Vector2 _viewport;
+        protected readonly Vector2 _viewport;
         protected readonly SpriteBatch _batch;
 
         public Vector2 Position
@@ -31,7 +30,7 @@ namespace Deficit.GUI
             get { return new Vector2(X, Y); }
         }
 
-        public Vector2 Size { get; protected set; }
+        public Vector2 Size { get; set; }
 
         public ParallaxComponent() : base(Program.Game)
         {
@@ -74,12 +73,13 @@ namespace Deficit.GUI
 
         public override void Update(GameTime gameTime)
         {
-            if (ParallaxValue <= 0) return;
+            if (ParallaxValue > 0)
+            {
+                int mX = MouseManager.X;
+                float maxX = _viewport.X;
 
-            int mX = MouseManager.X;
-            float maxX = _viewport.X;
-
-            x = (int)(mX / maxX * ParallaxValue) * Direction + X;
+                x = (int) (mX/maxX*ParallaxValue)*Direction + X;
+            }
 
             if (OnUpdate != null) OnUpdate(this, null);
             IsHover = VisualComponent.PointInRect(new Vector2(MouseManager.X, MouseManager.Y), new Vector2(x - Size.X * 0.5f,Y - Size.Y * 0.5f), Size);

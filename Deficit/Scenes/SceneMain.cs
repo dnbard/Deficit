@@ -17,6 +17,7 @@ namespace Deficit.Scenes
         private Time Timer;
 
         public List<Ship> Ships = new List<Ship>();
+        public Particles Particles = new Particles();
 
         private Ship _selected;
         public Ship SelectedShip
@@ -34,7 +35,7 @@ namespace Deficit.Scenes
 
         public SceneMain() : base("main")
         {
-            //Add(new Station());
+            Add(Particles);
 
             Timer = new Time();
             Timer.TimeOut += EndTurn;
