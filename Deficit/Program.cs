@@ -18,11 +18,15 @@ namespace Deficit
         [STAThread]
         static void Main()
         {
+            Random = new Random();
+
             Game = new DeficitGame();
             Game.Run();
         }
 
-        public static DeficitGame Game;
+        public static DeficitGame Game { get; private set; }
+
+        public static Random Random { get; private set; }
     }
 #endif
 }

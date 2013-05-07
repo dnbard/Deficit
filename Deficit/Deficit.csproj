@@ -40,7 +40,7 @@
     <Compile Include="Gameplay\FlickerImage.cs" />
     <Compile Include="Gameplay\Station.cs" />
     <Compile Include="Gameplay\Time.cs" />
-    <Compile Include="GUI\ParallaxBackground.cs" />
+    <Compile Include="GUI\ParallaxComponent.cs" />
     <Compile Include="GUI\VisualComponent.cs" />
     <Compile Include="Extentions\LinqExtention.cs" />
     <Compile Include="Extentions\StringExtention.cs" />
@@ -55,6 +55,8 @@
     <Compile Include="Scenes\SceneMain.cs" />
     <Compile Include="Scenes\SceneMainMenu.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Ships\Ship.cs" />
+    <Compile Include="Ships\ShipActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">

@@ -143,9 +143,9 @@ namespace Deficit.Extentions
 
         public static bool PointInRect(Vector2 point, Vector2 location, Vector2 size)
         {
-            bool x = point.X > location.X && point.X < location.X + size.X;
+            bool x = (point.X >= location.X) && (point.X <= location.X + size.X);
             if (!x) return false;
-            bool y = point.Y > location.Y && point.Y < location.Y + size.Y;
+            bool y = (point.Y >= location.Y) && (point.Y <= location.Y + size.Y);
             return y;
         }
     }

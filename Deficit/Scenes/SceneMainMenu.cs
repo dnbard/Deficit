@@ -14,14 +14,14 @@ namespace Deficit.Scenes
         public SceneMainMenu() : base("mainmenu")
         {
             //Add(new GUI.StretchBackground{Texture = ImagesManager.Get("background")});
-            Add(new ParallaxBackground
+            Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("bgscroll"),
                 ParallaxValue = 20,
                 Layer = 1f
             });
 
-            Add(new ParallaxBackground
+            Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("station-default"),
                 ParallaxValue = 60,
@@ -29,7 +29,7 @@ namespace Deficit.Scenes
                 X = 800
             });
 
-            Add(new ParallaxBackground
+            Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("menu0"),
                 ParallaxValue = 500,
@@ -39,7 +39,7 @@ namespace Deficit.Scenes
                 Y = 140
             });
 
-            /*Add(new ParallaxBackground
+            /*Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("menu1"),
                 ParallaxValue = 1280,
@@ -49,7 +49,7 @@ namespace Deficit.Scenes
                 Y = 140
             });*/
 
-            Add(new ParallaxBackground
+            Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("menu2"),
                 ParallaxValue = 40,
@@ -59,7 +59,7 @@ namespace Deficit.Scenes
                 Y = 640
             });
 
-            Add(new ParallaxBackground
+            Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("menu3"),
                 ParallaxValue = 40,
@@ -69,7 +69,7 @@ namespace Deficit.Scenes
                 Y = 40
             });
 
-            Add(new ParallaxBackground
+            Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("menu4"),
                 ParallaxValue = 30,
@@ -79,7 +79,7 @@ namespace Deficit.Scenes
                 Y = 40
             });
 
-            Add(new ParallaxBackground
+            Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("menu5"),
                 ParallaxValue = 25,
