@@ -12,11 +12,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Deficit.Scenes
 {
-    class SceneMain: Scene
+    sealed class SceneMain: Scene
     {
         private Time Timer;
 
         public List<Ship> Ships = new List<Ship>();
+
+        private Ship _selected;
+        public Ship SelectedShip
+        {
+            get { return _selected; }
+            set
+            {
+                if (value != null)
+                {
+                    Add(new CommunicationWindow(value));
+                }
+                _selected = value;
+            }
+        }
 
         public SceneMain() : base("main")
         {
@@ -73,7 +87,8 @@ namespace Deficit.Scenes
                 SecondColor = Color.Red,
                 FirstColor = Color.White,
                 OpacityMinimum = 0.15f,
-                OpacityIncrementValue = 0.015f
+                OpacityIncrementValue = 0.015f,
+                Condition = new Func<bool>(() => { return SelectedShip != null; })
             });
 
             Add(new FlickerImage
@@ -86,14 +101,10 @@ namespace Deficit.Scenes
                 SecondColor = Color.Green,
                 FirstColor = Color.White,
                 OpacityMinimum = 0.15f,
-                OpacityIncrementValue = 0.015f
+                OpacityIncrementValue = 0.015f,
+                Condition = new Func<bool>(() => { return SelectedShip == null; })
             });
 
-            Add(new Ship(this));
-            Add(new Ship(this));
-            Add(new Ship(this));
-            Add(new Ship(this));
-            Add(new Ship(this));
             Add(new Ship(this));
         }
 

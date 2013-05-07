@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace Deficit.Gameplay
 {
-    sealed class FlickerImage : VisualComponent 
+    class FlickerImage : VisualComponent 
     {
         public FlickerImage()
         {
@@ -27,6 +27,14 @@ namespace Deficit.Gameplay
         public Color FirstColor { get; set; }
         public Color SecondColor { get; set; }
         private Color _tranformToColor;
+
+        public Func<bool> Condition;
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (Condition == null || Condition())
+                base.Draw(gameTime);
+        } 
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {

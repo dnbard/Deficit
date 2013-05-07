@@ -22,7 +22,7 @@ namespace Deficit.Gameplay
 
         private Races()
         {
-            XDocument xml = new XDocument("XML//races.xml");
+            XDocument xml = XDocument.Load("XML\\races.xml");
             if (xml == null) throw new NullReferenceException("No races.xml found");
 
             foreach (var xElement in xml.Root.Elements())
@@ -53,6 +53,13 @@ namespace Deficit.Gameplay
                 return race.Value;
             }
             return null;
+        }
+
+        public static Race GetRandom()
+        {
+            var races = Instance.races;
+            Random rnd = Program.Random;
+            return Get(rnd.Next(0, races.Count));
         }
     }
 

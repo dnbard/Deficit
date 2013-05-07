@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Deficit.GUI;
+using Deficit.Gameplay;
 using Deficit.Images;
 using Deficit.Scenes;
 using Microsoft.Xna.Framework;
@@ -11,9 +12,7 @@ namespace Deficit.Ships
 {
     class Ship: ParallaxComponent
     {
-        
-
-
+        public GameFact<Race> Race = new GameFact<Race>(Races.GetRandom());
 
         public ShipActions CurrentAction { get; protected set; }
         private SceneMain _parentScene;
@@ -33,10 +32,11 @@ namespace Deficit.Ships
             var rect = Texture.GetSourceRect(TextureKey);
             Size = new Vector2(rect.Width, rect.Height);
 
-            Speed = 2;
+            Speed = 4;
 
             ParallaxValue = 80;
             Layer = 0.80f;
+            MouseHandled = true;
 
             CreateShip();
         }
@@ -47,7 +47,8 @@ namespace Deficit.Ships
 
             X = rnd.Next(-450, -150);
             CurrentAction = ShipActions.FlyToContainment;
-            FlyTo = _parentScene.GetFreeSpaceInContainment();
+            //FlyTo = _parentScene.GetFreeSpaceInContainment();
+            FlyTo = new Vector2(330, 350);
             
             Y = (int)FlyTo.Y + rnd.Next(-16, 16);
             Layer += rnd.Next(-16, 16)*0.01f;
@@ -74,7 +75,11 @@ namespace Deficit.Ships
             {
                 case ShipActions.FlyToContainment:
                     X += Speed;
-                    if (X > FlyTo.X + 50) CurrentAction = ShipActions.Wait;
+                    if (X > FlyTo.X + 50)
+                    {
+                        CurrentAction = ShipActions.Wait;
+                        _parentScene.SelectedShip = this;
+                    }
                     break;
             }
 

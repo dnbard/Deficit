@@ -38,10 +38,10 @@
     <Compile Include="core\MouseManager.cs" />
     <Compile Include="DeficitGame.cs" />
     <Compile Include="Gameplay\Facts.cs" />
-    <Compile Include="Gameplay\FlickerImage.cs" />
+    <Compile Include="GUI\CommunicationWindow.cs" />
+    <Compile Include="GUI\FlickerImage.cs" />
     <Compile Include="Gameplay\GameFact.cs" />
     <Compile Include="Gameplay\Races.cs" />
-    <Compile Include="Gameplay\Station.cs" />
     <Compile Include="Gameplay\Time.cs" />
     <Compile Include="GUI\ParallaxComponent.cs" />
     <Compile Include="GUI\VisualComponent.cs" />
