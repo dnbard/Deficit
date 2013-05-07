@@ -11,6 +11,10 @@ namespace Deficit.Ships
 {
     class Ship: ParallaxComponent
     {
+        
+
+
+
         public ShipActions CurrentAction { get; protected set; }
         private SceneMain _parentScene;
 
