@@ -38,6 +38,7 @@
     <Compile Include="core\MouseManager.cs" />
     <Compile Include="DeficitGame.cs" />
     <Compile Include="Gameplay\Facts.cs" />
+    <Compile Include="Gameplay\ShipsManager.cs" />
     <Compile Include="GUI\CommunicationWindow.cs" />
     <Compile Include="GUI\FlickerImage.cs" />
     <Compile Include="Gameplay\GameFact.cs" />
@@ -46,6 +47,7 @@
     <Compile Include="GUI\ParallaxComponent.cs" />
     <Compile Include="GUI\Particle.cs" />
     <Compile Include="GUI\Particles.cs" />
+    <Compile Include="GUI\ShipOverlay.cs" />
     <Compile Include="GUI\VisualComponent.cs" />
     <Compile Include="Extentions\LinqExtention.cs" />
     <Compile Include="Extentions\StringExtention.cs" />

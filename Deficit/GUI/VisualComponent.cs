@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Deficit.Images;
 using Deficit.core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
-namespace Deficit.Extentions
+namespace Deficit.GUI
 {
     class VisualComponent: DrawableGameComponent
     {
@@ -125,7 +121,7 @@ namespace Deficit.Extentions
         public EventHandler OnMouseLeftClick;
         public EventHandler OnMouseRightClick;
 
-        private bool _lastTickHover = false;
+        protected bool _lastTickHover = false;
         protected bool IsHover;
         protected bool IsLeftPress;
         protected bool IsRightPress;
@@ -168,7 +164,14 @@ namespace Deficit.Extentions
             bool y = (point.Y >= location.Y) && (point.Y <= location.Y + size.Y);
             return y;
         }
-    }
 
-    
+        public static bool PointInEllipse(Vector2 point, Vector2 location, Vector2 size)
+        {
+            float x = Math.Abs(location.X - point.X),
+                  y = Math.Abs(location.Y - point.Y);
+
+            bool result = x < size.X && y < size.Y;
+            return result;
+        }
+    }
 }

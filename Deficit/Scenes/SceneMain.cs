@@ -27,7 +27,6 @@ namespace Deficit.Scenes
             {
                 if (value != null)
                 {
-                    Add(new CommunicationWindow(value));
                 }
                 _selected = value;
             }
@@ -106,8 +105,8 @@ namespace Deficit.Scenes
                 Condition = new Func<bool>(() => { return SelectedShip == null; })
             });
 
-            //Add(new Ship(this));
-            Add(new BriefingWindow());
+            Add(new Ship(this));
+            //Add(new BriefingWindow());
         }
 
         private void EndTurn(object sender, EventArgs eventArgs)

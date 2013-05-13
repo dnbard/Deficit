@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Deficit.Extentions;
-using Deficit.Images;
 using Deficit.core;
 using Microsoft.Xna.Framework;
 
-namespace Deficit.Gameplay
+namespace Deficit.GUI
 {
     class FlickerImage : VisualComponent 
     {
@@ -17,12 +13,14 @@ namespace Deficit.Gameplay
             SecondColor = Color.Red;
             _tranformToColor = FirstColor;
             OpacityMinimum = 0.35f;
+            OpacityMaximum = 1f;
             OpacityIncrementValue = 0.0045f;
         }
 
-        private bool OpacityIncrement = false;
+        protected bool OpacityIncrement = false;
         public float OpacityIncrementValue { get; set; }
         public float OpacityMinimum { get; set; }
+        public float OpacityMaximum { get; set; }
 
         private Color _first;
         public Color FirstColor {
@@ -30,7 +28,7 @@ namespace Deficit.Gameplay
             set { _first = _tranformToColor = value; }
         }
         public Color SecondColor { get; set; }
-        private Color _tranformToColor;
+        protected Color _tranformToColor;
 
         public Func<bool> Condition;
 
@@ -38,7 +36,7 @@ namespace Deficit.Gameplay
         {
             if (Condition == null || Condition())
                 base.Draw(gameTime);
-        } 
+        }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
@@ -48,17 +46,19 @@ namespace Deficit.Gameplay
             if (OpacityIncrement)
             {
                 Opacity += OpacityIncrementValue * mod;
-                if (Opacity >= 1f)
+                if (Opacity >= OpacityMaximum)
                 {
-                    Opacity = 1f;
+                    Opacity = OpacityMaximum;
                     OpacityIncrement = false;
                 }
+                else if (Opacity < OpacityMinimum) Opacity = OpacityMinimum;
             }
             else
             {
                 Opacity -= OpacityIncrementValue * mod;
                 if (Opacity < OpacityMinimum)
                     OpacityIncrement = true;
+                else if (Opacity > OpacityMaximum) Opacity = OpacityMaximum;
             }
 
             byte r = Overlay.R,
