@@ -51,6 +51,7 @@
     <Compile Include="Extentions\StringExtention.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\StretchBackground.cs" />
+    <Compile Include="GUI\BriefingWindow.cs" />
     <Compile Include="Images\Image.cs" />
     <Compile Include="Images\ImagesManager.cs" />
     <Compile Include="Images\RectangleName.cs" />

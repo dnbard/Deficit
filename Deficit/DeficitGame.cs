@@ -21,6 +21,8 @@ namespace Deficit
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
+        public DateTime GameDate { get; set; }
+
         public Vector2 Viewport
         {
             get { return new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight); }

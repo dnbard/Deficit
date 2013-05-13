@@ -106,7 +106,8 @@ namespace Deficit.Scenes
                 Condition = new Func<bool>(() => { return SelectedShip == null; })
             });
 
-            Add(new Ship(this));
+            //Add(new Ship(this));
+            Add(new BriefingWindow());
         }
 
         private void EndTurn(object sender, EventArgs eventArgs)
