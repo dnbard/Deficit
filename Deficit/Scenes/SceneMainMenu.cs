@@ -117,7 +117,7 @@ namespace Deficit.Scenes
             Program.Game.GameDate = new DateTime(2028, 12, 16);
 
             var mainMenu = SceneManager.Current;
-            SceneManager.Current = new SceneMain();
+            SceneManager.Current = new SceneIntro();
             SceneManager.Delete(mainMenu);
         }
 

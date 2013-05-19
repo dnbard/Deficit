@@ -37,6 +37,12 @@ namespace Deficit.Scenes
             Name = _name;
         }
 
+        public void Clear()
+        {
+            DrawableComponents.Clear();
+            UpdatableComponents.Clear();
+        }
+
         public void Remove(IGameComponent[] elements)
         {
             foreach (var element in elements)

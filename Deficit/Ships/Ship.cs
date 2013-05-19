@@ -16,7 +16,7 @@ namespace Deficit.Ships
         public GameFact<Race> Race = new GameFact<Race>(Races.GetRandom());
 
         public ShipActions CurrentAction { get; protected set; }
-        private SceneMain _parentScene;
+        private readonly SceneMain _parentScene;
 
         public Vector2 FlyTo { get; set; }
         public int Speed { get; protected set; }
