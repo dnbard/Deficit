@@ -119,7 +119,8 @@ namespace Deficit.Scenes
 
             var mainMenu = SceneManager.Current;
 
-            SceneManager.Current = new SceneIntro();
+            //SceneManager.Current = new SceneIntro();
+            SceneManager.Current = new SceneSelfScan();
             SceneManager.Delete(mainMenu);
         }
 

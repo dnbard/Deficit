@@ -159,13 +159,14 @@ namespace Deficit.Scenes
             var dialog = new SceneDialog();
             dialog.Text =
                 "I've lost in the middle of nowhere. My ship is broken and i haven`t know what is wrong. \n\nNew objective: Scan ship for malfunctions.";
+            //dialog.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat justo a lorem vestibulum sit amet posuere leo sodales. In dignissim quam quis eros convallis bibendum. Sed ut leo sem, eu dapibus sem. Aenean adipiscing, risus vel rutrum condimentum, diam neque sollicitudin nunc, nec ullamcorper metus ante porttitor leo. Sed dui diam, porta quis posuere sit amet, aliquam ut purus. Phasellus elit mi, cursus et tempus egestas, congue eget elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque ullamcorper, sem et consequat semper, urna felis euismod mauris, nec tincidunt elit turpis non ligula. Vestibulum ultricies mollis justo.";
             dialog.TextShowSpeed = 35;
             dialog.Add(new VisualComponent
             {
                 Texture = ImagesManager.Get("intro-bg3"),
                 Layer = 0.99f
             });
-            dialog.NextScene = new SceneMain();
+            dialog.NextScene = new SceneSelfScan();
             SceneManager.Current = dialog;
             SceneManager.Delete(intro);
         }
