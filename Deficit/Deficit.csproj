@@ -48,6 +48,7 @@
     <Compile Include="GUI\ParallaxComponent.cs" />
     <Compile Include="GUI\Particle.cs" />
     <Compile Include="GUI\Particles.cs" />
+    <Compile Include="GUI\SelfScanOverlay.cs" />
     <Compile Include="GUI\ShipOverlay.cs" />
     <Compile Include="GUI\VisualComponent.cs" />
     <Compile Include="Extentions\LinqExtention.cs" />
@@ -66,8 +67,10 @@
     <Compile Include="Scenes\SceneMain.cs" />
     <Compile Include="Scenes\SceneMainMenu.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Scenes\SceneSelfScan.cs" />
     <Compile Include="Ships\Ship.cs" />
     <Compile Include="Ships\ShipActions.cs" />
+    <Compile Include="Text\VisualText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
