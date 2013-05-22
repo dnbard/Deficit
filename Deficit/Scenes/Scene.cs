@@ -158,12 +158,11 @@ namespace Deficit.Scenes
         /// Количество апдейтов, в которых сцена не чувствительна к изменениям.
         /// Используется при переходах между сценами.
         /// </summary>
-        private int GracePeriod = 1;
+        private int _gracePeriod = 1;
         public override void Update(GameTime gameTime)
         {
-            if (GracePeriod > 0) { GracePeriod--; return; }
+            if (_gracePeriod > 0) { _gracePeriod--; return; }
             base.Update(gameTime);
-            MouseState MouseState = Mouse.GetState();
 
             if (UpdateElements)
             {
