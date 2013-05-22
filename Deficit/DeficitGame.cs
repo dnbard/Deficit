@@ -51,10 +51,10 @@ namespace Deficit
             GraphicsDevice.Clear(Color.Black);
             Window.Title = "Deficit";
             Window.AllowUserResizing = false;
+            Components.Add(MouseManager.Instance);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Components.Add(MouseManager.Instance);
 
             SceneManager.Current = new SceneMainMenu();
 
@@ -95,10 +95,8 @@ namespace Deficit
                 graphics.ApplyChanges();
             }
 
-            SceneManager.Update(gameTime);
             base.Update(gameTime);
-
-            LastMouseState = Mouse.GetState();
+            SceneManager.Update(gameTime);
         }
 
         /// <summary>
@@ -113,8 +111,6 @@ namespace Deficit
 
             base.Draw(gameTime);
         }
-
-        public MouseState LastMouseState = Mouse.GetState();
 
     }
 }

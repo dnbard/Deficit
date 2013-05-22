@@ -61,6 +61,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\Scene.cs" />
+    <Compile Include="Scenes\SceneDialog.cs" />
     <Compile Include="Scenes\SceneIntro.cs" />
     <Compile Include="Scenes\SceneMain.cs" />
     <Compile Include="Scenes\SceneMainMenu.cs" />

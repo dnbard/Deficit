@@ -12,7 +12,12 @@ namespace Deficit.core
         private static MouseManager _instance;
         public static MouseManager Instance
         {
-            get { return _instance ?? (_instance = new MouseManager()); }
+            get 
+            { 
+                if (_instance == null)
+                    _instance = new MouseManager();
+                return _instance;
+            }
         }
 
         private MouseManager() : base(Program.Game)
@@ -48,8 +53,8 @@ namespace Deficit.core
         {
             get
             {
-                return Instance._mouseCurrent.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
-                       Instance._mouseLast.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
+                return Instance._mouseCurrent.LeftButton == ButtonState.Released &&
+                       Instance._mouseLast.LeftButton == ButtonState.Pressed;
             }
         }
 
@@ -57,19 +62,19 @@ namespace Deficit.core
         {
             get
             {
-                return Instance._mouseCurrent.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
-                       Instance._mouseLast.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
+                return Instance._mouseCurrent.RightButton == ButtonState.Released &&
+                       Instance._mouseLast.RightButton == ButtonState.Pressed;
             }
         }
 
         public static bool LeftButtonPress
         {
-            get { return Instance._mouseCurrent.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed; }
+            get { return Instance._mouseCurrent.LeftButton == ButtonState.Pressed; }
         }
 
         public static bool RightButtonPress
         {
-            get { return Instance._mouseCurrent.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed; }
+            get { return Instance._mouseCurrent.RightButton == ButtonState.Pressed; }
         }
 
         public override void Update(GameTime gTime)
