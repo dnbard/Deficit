@@ -119,19 +119,7 @@ namespace Deficit.Scenes
 
             var mainMenu = SceneManager.Current;
 
-            //SceneManager.Current = new SceneIntro();
-            var dialog = new SceneDialog();
-            dialog.Text =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas arcu lectus, accumsan eu viverra eu, iaculis eu libero. Nulla facilisi. In pretium magna a nibh rutrum vehicula. Nunc molestie eleifend metus, eget faucibus mi accumsan sit amet. Mauris vel blandit nunc. Praesent ultricies sem a justo mattis sit amet malesuada erat luctus. Donec nec velit quis tortor imperdiet posuere ut in enim. Donec non odio mi. Nullam lectus odio, cursus ac adipiscing vitae, cursus a leo. Donec ut tortor non ante volutpat tempor id eget ante. Ut euismod eros id nunc dapibus eu pellentesque urna commodo. Vestibulum tempor porttitor suscipit. Suspendisse facilisis suscipit odio, eu tempus magna pulvinar id. Sed viverra mauris a lectus mollis in ornare arcu gravida. Proin nec eros mi.";
-            dialog.TextShowSpeed = 25;
-            dialog.Add(new VisualComponent
-                {
-                    Texture = ImagesManager.Get("intro-bg3"),
-                    Layer = 0.99f
-                });
-            dialog.NextScene = new SceneIntro();
-            
-            SceneManager.Current = dialog;
+            SceneManager.Current = new SceneIntro();
             SceneManager.Delete(mainMenu);
         }
 

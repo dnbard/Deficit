@@ -155,9 +155,19 @@ namespace Deficit.Scenes
         {
             Program.Game.GameDate = new DateTime(2028, 12, 16);
 
-            var mainMenu = SceneManager.Current;
-            SceneManager.Current = new SceneMain();
-            SceneManager.Delete(mainMenu);
+            var intro = SceneManager.Current;
+            var dialog = new SceneDialog();
+            dialog.Text =
+                "I've lost in the middle of nowhere. My ship is broken and i haven`t know what is wrong. \n\nNew objective: Scan ship for malfunctions.";
+            dialog.TextShowSpeed = 35;
+            dialog.Add(new VisualComponent
+            {
+                Texture = ImagesManager.Get("intro-bg3"),
+                Layer = 0.99f
+            });
+            dialog.NextScene = new SceneMain();
+            SceneManager.Current = dialog;
+            SceneManager.Delete(intro);
         }
 
         private Action OnTick;

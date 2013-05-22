@@ -5,6 +5,7 @@ using System.Collections;
 using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
+using Deficit.core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -180,7 +181,7 @@ namespace Deficit.Scenes
             }
 
             if (OnMouseClick != null)
-                if (MouseState.LeftButton == ButtonState.Pressed && gameTime.TotalGameTime - LastAction > TimeSpan.FromSeconds(1))
+                if (MouseManager.LeftButtonClick && gameTime.TotalGameTime - LastAction > TimeSpan.FromSeconds(1))
                 {
                     OnMouseClick(new Vector2(MouseState.X, MouseState.Y));
                     LastAction = gameTime.TotalGameTime;
