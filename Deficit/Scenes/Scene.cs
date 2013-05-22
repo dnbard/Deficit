@@ -182,12 +182,12 @@ namespace Deficit.Scenes
             if (OnMouseClick != null)
                 if (MouseManager.LeftButtonClick && gameTime.TotalGameTime - LastAction > TimeSpan.FromSeconds(1))
                 {
-                    OnMouseClick(new Vector2(MouseState.X, MouseState.Y));
+                    OnMouseClick(new Vector2(MouseManager.X, MouseManager.Y));
                     LastAction = gameTime.TotalGameTime;
                 }
 
             if (OnMouseHover != null)
-                OnMouseHover(new Vector2(MouseState.X, MouseState.Y));
+                OnMouseHover(new Vector2(MouseManager.X, MouseManager.Y));
 
             if (OnKeyDown != null)
             {
