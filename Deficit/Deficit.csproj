@@ -37,6 +37,8 @@
   <ItemGroup>
     <Compile Include="core\MouseManager.cs" />
     <Compile Include="DeficitGame.cs" />
+    <Compile Include="Events\ContinuousEventComponent.cs" />
+    <Compile Include="Events\EventComponent.cs" />
     <Compile Include="Gameplay\Facts.cs" />
     <Compile Include="Gameplay\ShipsManager.cs" />
     <Compile Include="GUI\CommunicationWindow.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Deficit.Events;
 using Deficit.GUI;
 using Deficit.Images;
 using Deficit.Text;
@@ -13,8 +14,24 @@ namespace Deficit.Scenes
 {
     class SceneSelfScan: Scene
     {
+        private int _scans = 0;
+        public int ScansCompleted
+        {
+            get { return _scans; }
+            set 
+            { 
+                _scans = value;
+                if (value >= 5)
+                {
+                    AddContinueButton();
+                }
+            }
+        }
+
         public SceneSelfScan() : base("selfscan")
         {
+
+
             Add(new VisualComponent
             {
                 Texture = ImagesManager.Get("intro-bg3"),
@@ -44,7 +61,7 @@ namespace Deficit.Scenes
             var xml = XDocument.Load("XML/ships.xml");
             foreach (var section in xml.Root.Element("selfscan").Elements())
             {
-                Add(new SelfScanOverlay
+                Add(new SelfScanOverlay(this)
                     {
                         Texture = ImagesManager.Get("scan-hotzones"),
                         TextureKey = section.Attribute("name").Value,
@@ -78,6 +95,51 @@ namespace Deficit.Scenes
 
             foreach (var component in DrawableComponents)
                 component.Initialize();
+        }
+
+        private void AddContinueButton()
+        {
+            var continueButton = new Button
+                {
+                    Texture = ImagesManager.Get("gui-labels"),
+                    TextureKey = "continue",
+                    X = 1280 - 450,
+                    Y = 720 - 200,
+                    Layer = 0.12f,
+                    Opacity = 0,
+                    OnMouseLeftClick = (sender, e) =>
+                        {
+                            var currentScene = SceneManager.Current;
+
+                            SceneManager.Current = new SceneDialog
+                                {
+
+                                };
+                            SceneManager.Delete(currentScene);
+                        }
+                };
+            Add(continueButton);
+
+            Add(new ContinuousEventComponent(DrawableComponents)
+                {
+                    Argument = continueButton,
+                    FireCount = 25,
+                    FireTime = TimeSpan.FromMilliseconds(10),
+                    Action = (o) =>
+                        {
+                            var self = o as Button;
+                            if (self == null) return;
+
+                            self.Opacity += 0.025f;
+                        },
+                    EventEnd = (o) =>
+                        {
+                            var self = o as Button;
+                            if (self == null) return;
+
+                            self.Opacity = 1f;
+                        }
+                });
         }
     }
 }
