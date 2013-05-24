@@ -24,7 +24,7 @@ namespace Deficit.GUI
                 currentKey = ClickKey;
             else if (IsHover) currentKey = HoverKey;
 
-            Texture.Draw(Batch, currentKey, Position, 0f, Scale, Vector2.Zero, Color.White, Layer);
+            Texture.Draw(Batch, currentKey, Position, 0f, Scale, Vector2.Zero, Color.White * Opacity, Layer);
         }
     }
 }
