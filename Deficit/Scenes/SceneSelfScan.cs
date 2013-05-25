@@ -111,10 +111,17 @@ namespace Deficit.Scenes
                         {
                             var currentScene = SceneManager.Current;
 
-                            SceneManager.Current = new SceneDialog
+                            var scene = new SceneDialog
                                 {
-
+                                    Text = "some text",
+                                    TextShowSpeed = 35
                                 };
+                            scene.Add(new VisualComponent
+                            {
+                                Texture = ImagesManager.Get("intro-bg3"),
+                                Layer = 0.99f
+                            });
+                            SceneManager.Current = scene;
                             SceneManager.Delete(currentScene);
                         }
                 };
