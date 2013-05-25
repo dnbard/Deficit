@@ -14,6 +14,14 @@ namespace Deficit.Scenes
     {
         public SceneMainMenu() : base("mainmenu")
         {
+            Add(new StraightAnimation
+                {
+                    Texture = ImagesManager.Get("gfx-sun"),
+                    TextureKey = "sun",
+                    Layer = 0.1f,
+                    FramesPerSecond = 16
+                });
+
             //Add(new GUI.StretchBackground{Texture = ImagesManager.Get("background")});
             Add(new ParallaxComponent
             {

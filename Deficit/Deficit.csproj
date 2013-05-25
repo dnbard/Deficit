@@ -52,6 +52,7 @@
     <Compile Include="GUI\Particles.cs" />
     <Compile Include="GUI\SelfScanOverlay.cs" />
     <Compile Include="GUI\ShipOverlay.cs" />
+    <Compile Include="GUI\StraightAnimation.cs" />
     <Compile Include="GUI\VisualComponent.cs" />
     <Compile Include="Extentions\LinqExtention.cs" />
     <Compile Include="Extentions\StringExtention.cs" />
