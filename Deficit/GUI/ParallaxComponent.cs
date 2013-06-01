@@ -40,6 +40,8 @@ namespace Deficit.GUI
             _viewport = Program.Game.Viewport;
             _batch = Program.Game.spriteBatch;
             x = 0;
+            Opacity = 1f;
+            Overlay = Color.White;
 
             MouseHandled = false;
         }
@@ -54,7 +56,7 @@ namespace Deficit.GUI
         public override void Draw(GameTime gameTime)
         {
             if (Texture == null) return;
-            Texture.Draw(_batch, TextureKey, x, Y, Color.White, Layer);
+            Texture.Draw(_batch, TextureKey, x, Y, Overlay * Opacity, Layer);
         }
 
         public bool MouseHandled { get; set; }
@@ -70,6 +72,9 @@ namespace Deficit.GUI
         protected bool IsHover;
         protected bool IsLeftPress;
         protected bool IsRightPress;
+
+        public float Opacity { get; set; }
+        public Color Overlay { get; set; }
 
         public override void Update(GameTime gameTime)
         {

@@ -42,7 +42,12 @@ namespace Deficit.Scenes
         public static Scene Current
         {
             get { return instance._current; }
-            set { instance._current = value; }
+            set
+            {
+                instance._current = value;
+                if (!instance.scenes.ContainsValue(value))
+                    instance.scenes.Add(value.Name,value);
+            }
         }
 
         public static Scene Get(string name)
@@ -121,6 +126,14 @@ namespace Deficit.Scenes
         {
             instance.LastUpdate = gameTime;
             instance._current.Update(gameTime);
+        }
+
+        public static void RemoveElement(IGameComponent element)
+        {
+            var sceneCurrent = Current;
+            if (!Current.Remove(element))
+                if (instance.scenes.Any(pair => pair.Value.Remove(element))) 
+                    return;
         }
     }
 }

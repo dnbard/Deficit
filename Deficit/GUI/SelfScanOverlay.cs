@@ -105,8 +105,8 @@ namespace Deficit.GUI
         private void ScanComplete()
         {
             string name = TextureKey;
-            int _x = (_scanResult.X),
-                _y = (_scanResult.Y);
+            int _x = (int)(_scanResult.X),
+                _y = (int)(_scanResult.Y);
 
             ParentScene.ScansCompleted++;
 

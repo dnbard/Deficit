@@ -56,16 +56,25 @@ namespace Deficit.Scenes
             if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
         }
         
-        public void Remove(IGameComponent element)
+        public virtual bool Remove(IGameComponent element)
         {
             if (element is DrawableGameComponent && DrawableComponents.Contains(element))
+            {
                 DrawableComponents.Remove(element as DrawableGameComponent);
+                if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
+                return true;
+            }
             else if (element is GameComponent && UpdatableComponents.Contains(element))
+            {
                 UpdatableComponents.Remove(element as GameComponent);
-            if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
+                if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
+                return true;
+            }
+            
+            return false;
         }
 
-        public void Add(DrawableGameComponent[] elements)
+        public virtual void Add(DrawableGameComponent[] elements)
         {
             foreach (var element in elements)
             {
@@ -85,7 +94,7 @@ namespace Deficit.Scenes
             if (ElementsChanged != null) ElementsChanged.Invoke(this, EventArgs.Empty);
         }
 
-        public void Add(DrawableGameComponent element)
+        public virtual void Add(DrawableGameComponent element)
         {
             if (!DrawableComponents.Contains(element))
                 DrawableComponents.Add(element);

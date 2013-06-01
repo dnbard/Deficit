@@ -13,14 +13,7 @@ namespace Deficit.Scenes
     class SceneMainMenu: Scene
     {
         public SceneMainMenu() : base("mainmenu")
-        {
-            Add(new StraightAnimation
-                {
-                    Texture = ImagesManager.Get("gfx-sun"),
-                    TextureKey = "sun",
-                    Layer = 0.1f,
-                    FramesPerSecond = 16
-                });
+        {            
 
             //Add(new GUI.StretchBackground{Texture = ImagesManager.Get("background")});
             Add(new ParallaxComponent
@@ -77,8 +70,8 @@ namespace Deficit.Scenes
                 Direction = -1,
                 Y = 40
             });
-
-            Add(new ParallaxComponent
+            
+            /*Add(new ParallaxComponent
             {
                 Texture = ImagesManager.Get("menu4"),
                 ParallaxValue = 30,
@@ -86,6 +79,18 @@ namespace Deficit.Scenes
                 X = 680,
                 Direction = -1,
                 Y = 40
+            });*/
+
+            Add(new AnimatedParallaxComponent
+            {
+                Texture = ImagesManager.Get("gfx-sun"),
+                TextureKey = "sun",
+                Layer = 0.97f,
+                FramesPerSecond = 16,
+                X= 680,
+                Y = 40,
+                Direction = -1,
+                ParallaxValue = 30
             });
 
             Add(new ParallaxComponent
@@ -128,7 +133,7 @@ namespace Deficit.Scenes
             var mainMenu = SceneManager.Current;
 
             //SceneManager.Current = new SceneIntro();
-            SceneManager.Current = new SceneSelfScan();
+            SceneManager.Current = new SceneScroller();
             SceneManager.Delete(mainMenu);
         }
 

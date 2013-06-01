@@ -8,8 +8,8 @@ namespace Deficit.GUI
 {
     class VisualComponent: DrawableGameComponent
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public virtual float X { get; set; }
+        public virtual float Y { get; set; }
 
         private float _scale = 1f;
         public float Scale 
@@ -21,9 +21,9 @@ namespace Deficit.GUI
         public float Opacity { get; set; }
         public Color Overlay { get; set; }
 
-        protected Vector2 Position
+        public virtual Vector2 Position
         {
-            get{ return new Vector2(X + ParentOffsetX, Y + ParentOffsetY);}
+            get { return new Vector2(X + ParentOffsetX, Y + ParentOffsetY); }
         }
 
         private Vector2 _imageSize = Vector2.Zero;
@@ -34,6 +34,8 @@ namespace Deficit.GUI
                 if (Texture == null) return Vector2.Zero;
                 return _imageSize;
             }
+            protected set { _imageSize = value; }
+
         }
 
         private Image _texture = null;
@@ -55,7 +57,7 @@ namespace Deficit.GUI
 
         public VisualComponent Parent { get; set; }
 
-        protected int ParentOffsetX
+        protected float ParentOffsetX
         {
             get
             {
@@ -64,7 +66,7 @@ namespace Deficit.GUI
             }
         }
 
-        protected int ParentOffsetY
+        protected float ParentOffsetY
         {
             get
             {
@@ -74,8 +76,8 @@ namespace Deficit.GUI
         }
 
         protected const string DefaultTextureKey = "full";
-        private string _key = DefaultTextureKey;
-        public string TextureKey
+        protected string _key = DefaultTextureKey;
+        public virtual string TextureKey
         {
             get { return _key; }
             set
@@ -108,10 +110,12 @@ namespace Deficit.GUI
             Overlay = Color.White;
         }
 
+        public float Rotation { get; set; }
+
         public override void Draw(GameTime gameTime)
         {
             if (Texture == null) return;
-            Texture.Draw(Batch, TextureKey, Position, 0f, Scale, Vector2.Zero, Overlay * Opacity, Layer);
+            Texture.Draw(Batch, TextureKey, Position, Rotation, Scale, Vector2.Zero, Overlay * Opacity, Layer);
         }
 
         public EventHandler OnUpdate;

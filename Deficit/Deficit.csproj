@@ -41,6 +41,7 @@
     <Compile Include="Events\EventComponent.cs" />
     <Compile Include="Gameplay\Facts.cs" />
     <Compile Include="Gameplay\ShipsManager.cs" />
+    <Compile Include="GUI\AnimatedParallaxComponent.cs" />
     <Compile Include="GUI\CommunicationWindow.cs" />
     <Compile Include="GUI\FlickerImage.cs" />
     <Compile Include="Gameplay\GameFact.cs" />
@@ -70,7 +71,13 @@
     <Compile Include="Scenes\SceneMain.cs" />
     <Compile Include="Scenes\SceneMainMenu.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Scenes\SceneScroller.cs" />
     <Compile Include="Scenes\SceneSelfScan.cs" />
+    <Compile Include="Scroller\AsteroidSmall.cs" />
+    <Compile Include="Scroller\BaseSpaceEntity.cs" />
+    <Compile Include="Scroller\Player\PlayerShip.cs" />
+    <Compile Include="Scroller\Player\PlayerShipParticle.cs" />
+    <Compile Include="Scroller\Weapons\BaseWeapon.cs" />
     <Compile Include="Ships\Ship.cs" />
     <Compile Include="Ships\ShipActions.cs" />
     <Compile Include="Text\VisualText.cs" />
