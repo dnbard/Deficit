@@ -11,8 +11,8 @@ namespace Deficit.Scenes
 {
     class SceneScroller: Scene  
     {
-        public HashSet<BaseSpaceEntity> FriendlyObjects = new HashSet<BaseSpaceEntity>();
-        public HashSet<BaseSpaceEntity> HostileObjects = new HashSet<BaseSpaceEntity>();
+        public List<BaseSpaceEntity> FriendlyObjects = new List<BaseSpaceEntity>();
+        public List<BaseSpaceEntity> HostileObjects = new List<BaseSpaceEntity>();
 
         public SceneScroller() : base("scroller")
         {
@@ -24,10 +24,17 @@ namespace Deficit.Scenes
 
             Add(new PlayerShip());
 
-            Add(new AsteroidSmall()
+            Random rnd = Program.Random;
+
+            for (int i = 0; i < 25; i++)
+            {
+                Add(new AsteroidSmall()
                 {
-                    X = 400, Y = 250, AngularSpeed = 0.025f
-                });
+                    X = rnd.Next(400, 1280),
+                    Y = rnd.Next(0, 720),
+                    AngularSpeed = ((float)rnd.NextDouble() - 0.5f) * 0.05f
+                }); 
+            }
         }
 
         public override void Add(Microsoft.Xna.Framework.DrawableGameComponent element)
@@ -55,6 +62,13 @@ namespace Deficit.Scenes
                 FriendlyObjects.Remove(spaceObject);
                 return true;
             }
+
+            if (HostileObjects.Contains(spaceObject))
+            {
+                HostileObjects.Remove(spaceObject);
+                return true;
+            }
+
 
             return result;
         }

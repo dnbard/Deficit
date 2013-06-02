@@ -42,12 +42,12 @@ namespace Deficit.Scroller.Player
             Enabled = false;
         }
 
-        private float Rotation = (float) -Math.PI/2;
+        private float maxRotation = (float) -Math.PI/2;
 
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
         {
             if (Texture == null || !Enabled) return;
-            Texture.Draw(Batch, KeyFrame, Position, Rotation, Scale, Vector2.Zero, Overlay*Opacity, Layer);
+            Texture.Draw(Batch, KeyFrame, Position, maxRotation, Scale, Vector2.Zero, Overlay*Opacity, Layer);
         }
 
         public void StartFlames()

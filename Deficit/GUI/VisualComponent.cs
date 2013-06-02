@@ -110,6 +110,17 @@ namespace Deficit.GUI
             Overlay = Color.White;
         }
 
+        public Vector2 Origin { get; set; }
+
+        public void SetOriginToCenter()
+        {
+            if (Texture == null || string.IsNullOrEmpty(TextureKey)) return;
+
+            var rect = Texture.GetSourceRect(TextureKey);
+            if (rect == Rectangle.Empty) rect = Texture.GetSourceRect(TextureKey + "1");
+            Origin = new Vector2(rect.Width*0.5f, rect.Height*0.5f);
+        }
+
         public float Rotation { get; set; }
 
         public override void Draw(GameTime gameTime)

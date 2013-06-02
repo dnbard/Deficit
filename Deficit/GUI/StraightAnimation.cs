@@ -46,7 +46,7 @@ namespace Deficit.GUI
         public override void Draw(GameTime gameTime)
         {
             if (Texture == null || !Enabled) return;
-            Texture.Draw(Batch, KeyFrame, Position, 0f, Scale, Vector2.Zero, Overlay * Opacity, Layer);
+            Texture.Draw(Batch, KeyFrame, Position, 0f, Scale, Origin, Overlay * Opacity, Layer);
         }
 
         public override void Update(GameTime gameTime)

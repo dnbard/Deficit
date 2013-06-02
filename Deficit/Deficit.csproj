@@ -73,6 +73,7 @@
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="Scenes\SceneScroller.cs" />
     <Compile Include="Scenes\SceneSelfScan.cs" />
+    <Compile Include="Scroller\AsteroidExplosion.cs" />
     <Compile Include="Scroller\AsteroidSmall.cs" />
     <Compile Include="Scroller\BaseSpaceEntity.cs" />
     <Compile Include="Scroller\Player\PlayerShip.cs" />

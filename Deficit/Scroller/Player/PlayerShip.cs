@@ -164,19 +164,20 @@ namespace Deficit.Scroller.Player
             return speed;
         }
 
-        private void DetectCollision(HashSet<BaseSpaceEntity> collection)
+        private void DetectCollision(List<BaseSpaceEntity> collection)
         {
             var playerPosition = Position;
 
-            foreach (var entity in collection)
+            for (int i = 0; i < collection.Count; i ++ )
             {
+                var entity = collection[i];
                 float distance = Vector2.Distance(playerPosition, entity.Position);
                 float gamma = LinearSize + entity.LinearSize;
 
                 if (distance < gamma)
                 {
-                    if (OnCollision != null) OnCollision(this);
-                    if (entity.OnCollision != null) entity.OnCollision(entity);
+                    if (OnCollision != null) OnCollision(this, entity);
+                    if (entity.OnCollision != null) entity.OnCollision(entity, this);
                 }
             }
         }
