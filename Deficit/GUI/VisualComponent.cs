@@ -117,7 +117,7 @@ namespace Deficit.GUI
             if (Texture == null || string.IsNullOrEmpty(TextureKey)) return;
 
             var rect = Texture.GetSourceRect(TextureKey);
-            if (rect == Rectangle.Empty) rect = Texture.GetSourceRect(TextureKey + "1");
+            if (rect == Rectangle.Empty) rect = Texture.GetSourceRect(TextureKey + "0");
             Origin = new Vector2(rect.Width*0.5f, rect.Height*0.5f);
         }
 

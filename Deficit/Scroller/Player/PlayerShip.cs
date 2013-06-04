@@ -10,8 +10,8 @@ namespace Deficit.Scroller.Player
 {
     class PlayerShip:BaseSpaceEntity
     {
-        private static float _inertion = 0.2f;
-        private static float MaxSpeed = 5f;
+        private static float _inertion = 0.85f;
+        private static float MaxSpeed = 6.5f;
 
         public BaseWeapon Weapon;
 
@@ -30,7 +30,11 @@ namespace Deficit.Scroller.Player
 
             Random rnd = Program.Random;
 
-            Weapon = new BaseWeapon(this){xOffset = 70};
+            var GunsOffset = new Point[2];
+            GunsOffset[0] = new Point(30, -40);
+            GunsOffset[1] = new Point(30, 10);
+
+            Weapon = new BaseWeapon(this){xOffset = 70,GunHoles = GunsOffset};
             Components.Add(Weapon);
 
             FlameParticles = new PlayerShipParticle[2];
@@ -52,16 +56,25 @@ namespace Deficit.Scroller.Player
             foreach (var flameParticle in FlameParticles)
                 flameParticle.StopFlames();
         }
-        
-        private float Acceleration
+
+        private const float AccelerationConstant = 0.045f;
+        private float AccelerationX
         {
             get
             {
-                float avg = (XSpeed + YSpeed)*0.5f;
-                float acceleration = (MaxSpeed - avg) * 0.035f;
+                float acceleration = (MaxSpeed - XSpeed) * AccelerationConstant;
                 return acceleration;
-            }    
+            }
         }
+        private float AccelerationY
+        {
+            get
+            {
+                float acceleration = (MaxSpeed - YSpeed) * AccelerationConstant;
+                return acceleration;
+            }
+        }
+
 
         public override float X
         {
@@ -119,24 +132,24 @@ namespace Deficit.Scroller.Player
             var keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                XSpeed += Acceleration;
+                XSpeed += AccelerationX;
                 StartFlames();
             }
             else if (keyboard.IsKeyDown(Keys.Left))
             {
-                XSpeed -= Acceleration;
+                XSpeed -= AccelerationX;
                 StartFlames();
             }
             else XSpeed = SpeedChange(XSpeed);
 
             if (keyboard.IsKeyDown(Keys.Down))
             {
-                YSpeed += Acceleration;
+                YSpeed += AccelerationY;
                 StartFlames();
             }
             else if (keyboard.IsKeyDown(Keys.Up))
             {
-                YSpeed -= Acceleration;
+                YSpeed -= AccelerationY;
                 StartFlames();
             }
             else YSpeed = SpeedChange(YSpeed);
@@ -162,24 +175,6 @@ namespace Deficit.Scroller.Player
             if (Math.Abs(speed) < _inertion) speed = 0;
 
             return speed;
-        }
-
-        private void DetectCollision(List<BaseSpaceEntity> collection)
-        {
-            var playerPosition = Position;
-
-            for (int i = 0; i < collection.Count; i ++ )
-            {
-                var entity = collection[i];
-                float distance = Vector2.Distance(playerPosition, entity.Position);
-                float gamma = LinearSize + entity.LinearSize;
-
-                if (distance < gamma)
-                {
-                    if (OnCollision != null) OnCollision(this, entity);
-                    if (entity.OnCollision != null) entity.OnCollision(entity, this);
-                }
-            }
         }
 
         private void PlaceAtCenter()

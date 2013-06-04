@@ -69,14 +69,25 @@ namespace Deficit.Images
                             int horframes = SubTexture.GetAttributeValue("horframes", "1").AsInt();
                             int vertframes = SubTexture.GetAttributeValue("vertframes", "1").AsInt();
 
+                            int maxFrames = SubTexture.GetAttributeValue("maxframes").AsInt();
+                            if (maxFrames == 0) maxFrames = horframes*vertframes;
+
                             int counter = 0;
                             for (int j = 0; j < vertframes; j++)
+                            {
                                 for (int i = 0; i < horframes; i++)
                                 {
                                     string texturename = string.Format("{0}{1}", SubTextureName, counter);
-                                    newImage.Rectangles.Add(new RectangleName() { Rect = new Rectangle(Left + Width * i, Top + Height * j, Width, Height), Name = texturename });
+                                    newImage.Rectangles.Add(new RectangleName()
+                                        {
+                                            Rect = new Rectangle(Left + Width*i, Top + Height*j, Width, Height),
+                                            Name = texturename
+                                        });
                                     counter++;
+                                    if (counter == maxFrames) break;
                                 }
+                                if (counter == maxFrames) break;
+                            }
                             newImage.AnimationFrames.Add(SubTextureName, horframes * vertframes);
                         }
                         else if (SubTexture.Name == "framescount")

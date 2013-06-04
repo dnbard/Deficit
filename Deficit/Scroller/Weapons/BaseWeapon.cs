@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Deficit.GUI;
 using Deficit.Images;
+using Deficit.Scroller.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -23,6 +24,35 @@ namespace Deficit.Scroller.Weapons
 
             Texture = ImagesManager.Get("gfx-ships");
             TextureKey = "playerweapon";
+        }
+
+        private Point[] _holes;
+        public Point[] GunHoles
+        {
+            get
+            {
+                if (_holes == null || _holes.Length == 0)
+                {
+                    var result = new Point[1];
+                    result[0] = new Point(0, 0);
+                    return result;
+                }
+                return _holes;
+            }
+            set { _holes = value; }
+        }
+
+        public bool ShootFromAllGuns { get; set; }
+
+        private int gunCount;
+        protected int CurrentGunHole
+        {
+            get 
+            { 
+                gunCount++;
+                if (gunCount >= GunHoles.Length) gunCount = 0;
+                return gunCount;
+            }
         }
 
         public override string TextureKey
@@ -73,6 +103,22 @@ namespace Deficit.Scroller.Weapons
                 if (time - LastAction >= ActionDelay)
                 {
                     LastAction = time;
+                    if (ShootFromAllGuns)
+                        foreach (var gunHole in GunHoles)
+                            (Parent as PlayerShip).ParentScene.Add(new Projectile()
+                            {
+                                X = Parent.X + gunHole.X,
+                                Y = Parent.Y + gunHole.Y
+                            });
+                    else
+                    {
+                        var gunHole = GunHoles[CurrentGunHole];
+                        (Parent as PlayerShip).ParentScene.Add(new Projectile()
+                        {
+                            X = Parent.X + gunHole.X,
+                            Y = Parent.Y + gunHole.Y
+                        });
+                    }
                 }
             }
         }

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deficit", "Deficit\Deficit.csproj", "{CD53400E-D4F7-49BC-9BDC-C6D653A3FD85}"
 EndProject
 Global

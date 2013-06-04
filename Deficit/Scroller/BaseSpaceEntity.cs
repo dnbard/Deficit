@@ -21,7 +21,7 @@ namespace Deficit.Scroller
         public Action<BaseSpaceEntity, BaseSpaceEntity> OnCollision { get; set; }
         public Action<BaseSpaceEntity> OnTime { get; set; }
 
-        protected SceneScroller ParentScene;
+        public SceneScroller ParentScene { get; set; }
 
         public BaseSpaceEntity()
         {
@@ -61,6 +61,26 @@ namespace Deficit.Scroller
         {
             if (Texture == null || !Enabled) return;
             Texture.Draw(Batch, TextureKey, Position, Rotation, Scale, Origin, Overlay * Opacity, Layer);
+        }
+
+        protected void DetectCollision(List<BaseSpaceEntity> collection)
+        {
+            var playerPosition = Position;
+
+            for (int i = 0; i < collection.Count; i++)
+            {
+                var entity = collection[i];
+                if (entity == this) continue;
+
+                float distance = Vector2.Distance(playerPosition, entity.Position);
+                float gamma = LinearSize + entity.LinearSize;
+
+                if (distance < gamma)
+                {
+                    if (OnCollision != null) OnCollision(this, entity);
+                    if (entity.OnCollision != null) entity.OnCollision(entity, this);
+                }
+            }
         }
     }
 }

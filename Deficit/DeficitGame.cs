@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Deficit.Scenes;
 using Deficit.core;
 using Microsoft.Xna.Framework;
@@ -59,6 +60,7 @@ namespace Deficit
             SceneManager.Current = new SceneMainMenu();
 
             base.Initialize();
+            LoadEffects();
         }
 
         /// <summary>
@@ -114,6 +116,15 @@ namespace Deficit
             SceneManager.Draw(gameTime);
 
             base.Draw(gameTime);
+        }
+
+        private void LoadEffects()
+        {
+            //var file = new FileStream("Content/Effect/GaussianBlur.xnb",FileMode.Open);
+            //byte[] buffer = new byte[file.Length];
+            //file.Read(buffer, 0, (int)file.Length);
+            //var effect = new Effect(GraphicsDevice, buffer);
+            //file.Close();
         }
 
     }

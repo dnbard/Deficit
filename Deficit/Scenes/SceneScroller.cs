@@ -6,6 +6,8 @@ using Deficit.GUI;
 using Deficit.Images;
 using Deficit.Scroller;
 using Deficit.Scroller.Player;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Deficit.Scenes
 {
@@ -26,11 +28,11 @@ namespace Deficit.Scenes
 
             Random rnd = Program.Random;
 
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < 250; i++)
             {
                 Add(new AsteroidSmall()
                 {
-                    X = rnd.Next(400, 1280),
+                    X = rnd.Next(1280, 12800),
                     Y = rnd.Next(0, 720),
                     AngularSpeed = ((float)rnd.NextDouble() - 0.5f) * 0.05f
                 }); 
@@ -44,7 +46,7 @@ namespace Deficit.Scenes
             var spaceObject = element as BaseSpaceEntity;
             if (spaceObject == null) return;
 
-            if (spaceObject is PlayerShip /*AND friendly objects*/)
+            if (spaceObject is PlayerShip || spaceObject is Projectile)
                 FriendlyObjects.Add(spaceObject);
             else //if (spaceObject is BaseSpaceEntity)
                 HostileObjects.Add(spaceObject);
@@ -69,8 +71,16 @@ namespace Deficit.Scenes
                 return true;
             }
 
-
             return result;
+        }
+
+        public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
+        {
+            SpriteBatch batch = Program.Game.spriteBatch;
+
+            batch.Begin(SpriteSortMode.BackToFront, BlendState.NonPremultiplied);
+            DrawableComponents.ForEach(element => element.Draw(gameTime));
+            batch.End();
         }
     }
 }
