@@ -27,6 +27,7 @@ namespace Deficit.Scroller.Player
             PlaceAtCenter();
             Layer = 0.5f;
             LinearSize = 40;
+            Alignment = EntityAlignment.Friendly;
 
             Random rnd = Program.Random;
 

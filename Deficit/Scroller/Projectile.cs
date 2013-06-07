@@ -52,12 +52,14 @@ namespace Deficit.Scroller
             LinearSpeed = 400;
             Layer = 0.25f;
             Direction = ProjectileDirection.Right;
+            Alignment = EntityAlignment.Friendly;
 
             LinearSize = 14;
             SetOriginToCenter();
 
             OnCollision = (self, target) =>
                 {
+                    target.Health -= self.Damage;
                     SceneManager.RemoveElement(self);
                 };
         }

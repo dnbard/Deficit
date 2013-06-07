@@ -8,8 +8,27 @@ namespace Deficit.GUI
 {
     class VisualComponent: DrawableGameComponent
     {
-        public virtual float X { get; set; }
-        public virtual float Y { get; set; }
+        private float _x = 0, _y = 0;
+        public virtual float X
+        {
+            get { return _x; }
+            set
+            {
+                _x = value;
+                if (PositionChanged != null) PositionChanged(this);
+            }
+        }
+        public virtual float Y
+        {
+            get { return _y; }
+            set
+            {
+                _y = value;
+                if (PositionChanged != null) PositionChanged(this);
+            }
+        }
+
+        protected Action<VisualComponent> PositionChanged { get; set; }
 
         private float _scale = 1f;
         public float Scale 

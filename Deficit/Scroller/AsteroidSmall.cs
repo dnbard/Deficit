@@ -10,33 +10,39 @@ namespace Deficit.Scroller
 {
     class AsteroidSmall:BaseSpaceEntity
     {
-        public float AngularSpeed = 0f;
-
         public AsteroidSmall()
         {
             Texture = ImagesManager.Get("space-asteroids");
             int asteroidsCount = Texture.GetNumberOfFrames("asteroid");
             Random rnd = Program.Random;
+            Alignment = EntityAlignment.Hostile;
 
             TextureKey = "asteroid" + rnd.Next(0, asteroidsCount);
 
             Layer = 0.54f;
             LinearSize = 30;
 
-            OnCollision = (self, target) =>
+            OnDestroy = entity =>
                 {
-                    SceneManager.RemoveElement(self);
                     var explosion = new StraightAnimation
-                        {
-                            Layer = this.Layer - 0.01f,
-                            X = X,
-                            Y = Y,
-                            Texture = ImagesManager.Get("gfx-explosion"),
-                            TextureKey = "effect",
-                            PlayOnce = true
-                        };
+                    {
+                        Layer = this.Layer - 0.01f * (float)rnd.NextDouble(),
+                        X = X,
+                        Y = Y,
+                        Texture = ImagesManager.Get("gfx-explosion"),
+                        TextureKey = "effect",
+                        PlayOnce = true
+                    };
                     explosion.SetOriginToCenter();
                     ParentScene.Add(explosion);
+
+                    var debris = AsteroidDebris.Create(rnd.Next(15, 45), this);
+                    ParentScene.Add(debris);
+                };
+
+            OnCollision = (self, target) =>
+                {
+                    target.Health -= self.Damage;
                 };
 
             OnTime = self =>
@@ -45,15 +51,9 @@ namespace Deficit.Scroller
                     if (self.X < 0 - Size.X) SceneManager.RemoveElement(self);
                 };
 
+            MoveOutViewport = RemoveQuietly;
+
             LinearSpeed = rnd.Next(60, 260);
-        }
-
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            Rotation += AngularSpeed;
-            if (Math.Abs(Rotation) > Math.PI*2) Rotation = 0;
         }
     }
 }

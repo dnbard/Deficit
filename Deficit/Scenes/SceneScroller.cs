@@ -39,6 +39,27 @@ namespace Deficit.Scenes
             }
         }
 
+        public override void Add(DrawableGameComponent[] elements)
+        {
+            base.Add(elements);
+
+            foreach (var element in elements)
+            {
+                var spaceObject = element as BaseSpaceEntity;
+                if (spaceObject == null) return;
+
+                switch (spaceObject.Alignment)
+                {
+                    case EntityAlignment.Friendly:
+                        FriendlyObjects.Add(spaceObject);
+                        break;
+                    case EntityAlignment.Hostile:
+                        HostileObjects.Add(spaceObject);
+                        break;
+                }
+            }
+        }
+
         public override void Add(Microsoft.Xna.Framework.DrawableGameComponent element)
         {
             base.Add(element);
@@ -46,10 +67,15 @@ namespace Deficit.Scenes
             var spaceObject = element as BaseSpaceEntity;
             if (spaceObject == null) return;
 
-            if (spaceObject is PlayerShip || spaceObject is Projectile)
-                FriendlyObjects.Add(spaceObject);
-            else //if (spaceObject is BaseSpaceEntity)
-                HostileObjects.Add(spaceObject);
+            switch (spaceObject.Alignment)
+            {
+                case EntityAlignment.Friendly:
+                    FriendlyObjects.Add(spaceObject);
+                    break;
+                case EntityAlignment.Hostile:
+                    HostileObjects.Add(spaceObject);
+                    break;
+            }
         }
 
         public override bool Remove(Microsoft.Xna.Framework.IGameComponent element)
@@ -57,18 +83,16 @@ namespace Deficit.Scenes
             bool result = base.Remove(element);
 
             var spaceObject = element as BaseSpaceEntity;
-            if (spaceObject == null) return result;
+            if (spaceObject == null || spaceObject.Alignment == EntityAlignment.Neutral) return result;
 
-            if (FriendlyObjects.Contains(spaceObject))
+            switch (spaceObject.Alignment)
             {
-                FriendlyObjects.Remove(spaceObject);
-                return true;
-            }
-
-            if (HostileObjects.Contains(spaceObject))
-            {
-                HostileObjects.Remove(spaceObject);
-                return true;
+                case EntityAlignment.Friendly:
+                    FriendlyObjects.Remove(spaceObject);
+                    break;
+                case EntityAlignment.Hostile:
+                    HostileObjects.Remove(spaceObject);
+                    break;
             }
 
             return result;
